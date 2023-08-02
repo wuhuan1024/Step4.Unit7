@@ -1,0 +1,67 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@model X.PagedList.StaticPagedList<Step4.Unit7.Service.Dto.AccountViewModel>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>案件查询</h2>
+<form action="">
+    姓名：@Html.TextBox("DebtorName")
+    银行：@Html.TextBox("BankName")
+    状态：@Html.DropDownList("AccountState", ViewBag.StateList, "请选择", null)
+    <input class="btn btn-primary" type="submit" value="查询"/>
+    <a asp-action="Add" class="btn btn-info">添加</a>
+</form>
+<table class="table table-hover">
+    <tr>
+        <td>姓名</td>
+        <td>身份证</td>
+        <td>银行</td>
+        <td>状态</td>
+        <td>手机号</td>
+        <td>业务员</td>
+        <td>欠款金额</td>
+        <td>操作时间</td>
+        <td>操作</td>
+
+    </tr>
+    @foreach (var account in Model)
+    {
+        <tr>
+            <td>@account.DebtorName</td>
+            <td>@account.IdCard</td>
+            <td>@account.BankName</td>
+            <td>@account.AccountState</td>
+            <td>@account.Phone</td>
+            <td>@account.SaleMan</td>
+            <td>@account.DebtorMoney</td>
+            <td>@account.UpdatedTime</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@account.Id" class="btn btn-info">编辑</a>
+                &nbsp;&nbsp;
+                <a onclick="return confirm('确定删除?')" asp-action="Delete" asp-route-id="@account.Id" class="btn btn-danger">删除</a>
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.PagedListPager(Model, pageIndex => $"/Account/Index?pageIndex={pageIndex}&pageSize=3"
+    , new PagedListRenderOptions
+    {
+        LinkToFirstPageFormat = "首页",
+        LinkToNextPageFormat = "下一页",
+        LinkToPreviousPageFormat = "上一页",
+        LinkToLastPageFormat = "末页",
+        MaximumPageNumbersToDisplay = 2,
+        DisplayItemSliceAndTotal = false, //从头到尾显示
+        UlElementClasses = new[] { "pagination" },
+        // 为ul li a 元素添加链接，使用ContainerDivClasses = new[] { "pagination" }替换
+        // UlElementClasses = new[] { "pagination"},也是相同的效果。也可以不要此行代码，
+        // 因为Bootstrap4与3相比，ul的class名没有变化，li 元素和a 元素加了page-item和page-link的类名。
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" }
+    })

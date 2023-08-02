@@ -1,0 +1,64 @@
+﻿@model Step4.Unit7.Service.Dto.AccountBo
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>添加</h2>
+
+<form asp-action="SubmitAdd" method="post">
+     <table class="table">
+            <tr>
+                <td>
+                    <label asp-for="DebtorId"></label>
+                </td>
+                <td>
+                    <select asp-items="ViewBag.DebtorList" asp-for="DebtorId">
+                        <option value="">请选择</option>
+                    </select>
+                </td>
+                <td>
+                    <span asp-validation-for="DebtorId"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="BankName"></label>
+                </td>
+                <td>
+                    <input asp-for="BankName"/>
+                </td>
+                <td>
+                    <span asp-validation-for="BankName"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="SaleMan"></label>
+                </td>
+                <td>
+                     <input asp-for="SaleMan"/>
+                </td>
+                <td>
+                    <span asp-validation-for="SaleMan"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                     <label asp-for="DebtorMoney"></label>
+                </td>
+                <td>
+                    <input type="number" asp-for="DebtorMoney"/>
+                </td>
+                <td>
+                    <span asp-validation-for="DebtorMoney"></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <input type="submit" value="提交" class="btn btn-primary"/>
+                </td>
+            </tr>
+        </table>
+</form>

@@ -1,0 +1,45 @@
+﻿@model Step4.Unit7.Service.Dto.AccountUpdateBo
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>编辑</h2>
+<form asp-action="SubmitUpdate" method="post">
+    <input type="hidden" asp-for="Id"/>
+    <table class="table">
+        <tr>
+            <td>
+                <label asp-for="AccountState"></label>
+            </td>
+            <td>
+                <select asp-items="ViewBag.StateList" asp-for="AccountState">
+                    <option value="">请选择</option>
+                </select>
+            </td>
+            <td>
+                <span asp-validation-for="AccountState"></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label asp-for="SaleMan"></label>
+            </td>
+            <td>
+                <input asp-for="SaleMan"/>
+            </td>
+            <td>
+                <span asp-validation-for="SaleMan"></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <input type="submit" value="提交" class="btn btn-primary"/>
+            </td>
+
+        </tr>
+    </table>
+</form>
